@@ -7,4 +7,4 @@
 아래에 제 백준 아이디 페이지 링크가 있습니다.
 
 ### BAEKJOON USERNAME : jurracdino
-## <a> https://www.acmicpc.net/user/jurracdin
+## <a> https://www.acmicpc.net/user/jurracdino
