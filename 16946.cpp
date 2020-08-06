@@ -15,7 +15,7 @@ const int move_pos[4][2] = { {-1,0},{0,1},{1,0},{0,-1} };
 v_map InitMap(int, int);
 void FindMoveArea(v_map&);
 int MoveCount(v_map&, s_pos&, pair<int, int>);
-bool IsRightMove(v_map&, pair<int, int>, int, int);
+bool IsRightMove(v_map&, pair<int, int>&&, int, int);
 
 int main()
 {
@@ -136,7 +136,7 @@ int MoveCount(v_map& map, s_pos& stack, pair<int, int> pos)
 	return count;
 }
 
-bool IsRightMove(v_map& map, pair<int, int> pos, int height, int width)
+bool IsRightMove(v_map& map, pair<int, int>&& pos, int height, int width)
 {
 	//¸Ê ÀÚÃ¼¸¦ ¹þ¾î³­ °æ¿ì
 	if (pos.first < 0 || pos.second < 0 || pos.first >= height || pos.second >= width)
