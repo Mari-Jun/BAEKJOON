@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <numeric>
+#include <climits>
 #include <algorithm>
 
 using namespace std;
@@ -40,7 +41,7 @@ int MCM(int start, int end)
 		return ret;
 	}
 
-	ret = numeric_limits<int>::max();
+	ret = INT_MAX;
 
 	for (int next = start; next < end; next++)
 	{
