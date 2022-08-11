@@ -1,73 +1,40 @@
 #include <iostream>
-#include <memory.h>
+#include <array>
 
 using namespace std;
 
-int N;
-bool NumCheck[15][15];
+int n;
+array<bool, 15> g_y_check;
+array<bool, 30> g_left_check;
+array<bool, 30> g_right_check;
 
-int Solve(int y);
+int FindQueen(int y)
+{
+	if (y == n) return 1;
 
-int main() {
-	memset(NumCheck, false, sizeof(NumCheck));
+	int ret = 0;
 
-	cin >> N;
-	
-	cout << Solve(-1);
+	for (int x = 0; x < n; ++x)
+	{
+		if (g_y_check[x] == false &&
+			g_left_check[n + x - y] == false &&
+			g_right_check[x + y] == false)
+		{
+			g_left_check[n + x - y] = true;
+			g_right_check[x + y] = true;
+			g_y_check[x] = true;
+			ret += FindQueen(y + 1);
+			g_y_check[x] = false;
+			g_left_check[n + x - y] = false;
+			g_right_check[x + y] = false;
+		}
+	}
 
-	return 0;
-
+	return ret;
 }
 
-int Solve(int y) {
-	if (y >= N - 1)
-		return 1;
-	else {
-		int Sum = 0;
-
-		for (int x = 0; x < N; x++) {
-
-			bool Pass = true;
-
-			for (int i = 0; i < y+1; i++)
-				if (NumCheck[i][x]) {
-					Pass = false;
-					break;
-				}
-
-			if (Pass) {
-				int a = y + 1, b = x;
-				while (a >= 0 && b >= 0) {
-					if (NumCheck[a][b]) {
-						Pass = false;
-						break;
-					}
-					a--;
-					b--;
-				}
-			}
-
-			if (Pass) {
-				int a = y + 1, b = x;
-				while (a >= 0 && b < N) {
-					if (NumCheck[a][b]) {
-						Pass = false;
-						break;
-					}
-					a--;
-					b++;
-				}
-			}
-
-			if (!Pass) 
-				continue;			
-
-			NumCheck[y + 1][x] = true;
-
-			Sum += Solve(y + 1);
-
-			NumCheck[y + 1][x] = false;
-		}
-		return Sum;
-	}
+int main()
+{
+	cin >> n;
+	cout << FindQueen(0);
 }
